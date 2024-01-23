@@ -2,22 +2,28 @@
 const list = document.getElementById("my_ul");
 const input = document.getElementById("addToDo");
 
-// delete element
-list.addEventListener("click", function(e) {
-    console.log(e);
-//   if (e.target.matches(".fa-trash")) {
-//     e.target.parentElement.parentElement.remove();
-//   }
-});
+
+const deleteTask = (e) => {
+    if (e.target.matches(".fa-trash")) {
+        e.target.parentElement.parentElement.remove();
+    return true;
+    }  
+return false;
+}
+
+
+const addTask = (e) => {
+    let newValue = document.createElement("li");
+    if (e.key === 'Enter' || e.keyCode === 13){
+     newValue.innerHTML = `<span><i class="fa fa-trash"></i></span> ${e.target.value}`;
+     list.appendChild(newValue);
+     e.target.value = '';
+     return true;
+    }
+  return false;
+}
 
 list.addEventListener("click", deleteTask);
+input.addEventListener("keyup", addTask);
 
-function deleteTask(event) {
-    console.log(event)
-    // const clickedElement = event.target;
-    // if (clickedElement.classList.contains("fa-trash")) {
-    //   const listItem = clickedElement.parentElement.parentElement;
-    //   todoList.removeChild(listItem);
-    // }
-  }
   
